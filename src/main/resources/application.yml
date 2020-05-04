@@ -1,0 +1,25 @@
+server:
+    port: 1000
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://yuanshuai:dk@localhost:8082/eureka/
+            # 服务端开启安全认证后的配置
+spring:
+  application:
+    name:  SpringCloud-Zuul
+zuul:
+  retryable: true
+  routes:
+    ribbon:
+        path: /api-ribbon/**
+        serviceId: service-ribbon
+    feign:
+        path: /api-feign/**
+        serviceId: service-feign
+    # 跳转到本地
+    local:
+        path: /api/**
+        url: forward:/local
+#  # 路由前缀(存在bug)
+#  prefix: /prefix
